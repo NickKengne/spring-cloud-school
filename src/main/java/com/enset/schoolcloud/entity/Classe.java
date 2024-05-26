@@ -5,26 +5,20 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
 @Setter
 @Getter
 @Table(name = "class")
-public class Classes {
+public class Classe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer class_id;
     private String name;
-    private String diminutif;
+    private Integer cycle;
+    private String name_numeric;
+    private Integer teacher_id;
 
-    @ManyToOne
-    @JoinColumn(name = "departement_id")
-    private Departement departement;
-
-    @OneToMany
-    private List<Courses> courses;
 
 
 }

@@ -1,0 +1,40 @@
+package com.enset.schoolcloud.entity;
+
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Table(name = "student")
+@Getter
+@Setter
+public class Student {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer student_id;
+    @Column(nullable = false)
+    private String student_code;
+    private String name;
+    private String surname;
+    @Column(nullable = false)
+    private String email;
+    @Column(nullable = false)
+    private String password;
+    private String phone;
+    private String birthday;
+    private String at;
+    private String sex;
+    private String address;
+    private String year;
+
+    @OneToOne
+    @JoinColumn(name ="parent_id")
+    private Parent parent;
+
+
+    @OneToOne
+    @JoinColumn(name = "class_id")
+    private Classe classe;
+}

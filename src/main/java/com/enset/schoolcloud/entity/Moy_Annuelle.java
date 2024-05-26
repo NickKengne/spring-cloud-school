@@ -1,5 +1,6 @@
 package com.enset.schoolcloud.entity;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,28 +9,28 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Getter
 @Setter
-@Table(name = "notes")
-public class Notes {
+@Table(name = "moy_annuelle")
+@Entity
+public class Moy_Annuelle {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private Float cc;
-    private Float normale;
+    private Integer moy_id;
+    private Float moy_annuelle;
+    private String year;
 
 
     @OneToOne
-    @JoinColumn(name = "etudiant_id")
-    private Etudiant etudiant;
+    @JoinColumn(name = "student_id")
+    private Student student;
 
     @OneToOne
-    @JoinColumn(name = "courses_id")
-    private Courses courses;
+    @JoinColumn(name = "class_id")
+    private Classe classe;
 
     @OneToOne
-    @JoinColumn(name = "exam_type_id")
-    private ExamType examType;
-
+    @JoinColumn(name ="section_id")
+    private Section section;
 }

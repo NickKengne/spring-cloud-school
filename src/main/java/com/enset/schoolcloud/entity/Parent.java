@@ -1,32 +1,24 @@
 package com.enset.schoolcloud.entity;
 
-
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Table(name = "admin")
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-public class Admin {
-
+@Table(name = "parent")
+@Entity
+public class Parent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer admin_id;
+    private Integer parent_id;
     private String name;
     private String email;
     private String password;
-    @Enumerated(EnumType.STRING)
-    private Role type = Role.ADMIN;
     private String phone;
-
-
-
-    enum Role {
-        ADMIN,
-        TEACHER,
-        SUPER_ADMIN
-    }
-
+    private String address;
 }
