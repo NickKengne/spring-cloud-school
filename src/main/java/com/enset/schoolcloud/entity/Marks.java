@@ -1,10 +1,7 @@
 package com.enset.schoolcloud.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "mark")
+@Builder
 public class Marks {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

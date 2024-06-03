@@ -2,9 +2,9 @@ package com.enset.schoolcloud.controller;
 
 
 import com.enset.schoolcloud.dto.LoginDto;
-import com.enset.schoolcloud.dto.RegisterDto;
-import com.enset.schoolcloud.entity.Admin;
+import com.enset.schoolcloud.dto.StudentRegisterDto;
 import com.enset.schoolcloud.entity.Student;
+import com.enset.schoolcloud.repository.ClassesRepository;
 import com.enset.schoolcloud.repository.StudentRepository;
 import com.enset.schoolcloud.response.RegisterResponse;
 import com.enset.schoolcloud.service.StudentService;
@@ -23,12 +23,12 @@ public class StudentController {
 
     private final StudentService studentService;
     private final StudentRepository studentRepository;
+    private final ClassesRepository classesRepository;
 
 
-    /*
     @PostMapping("/auth/register")
-    public RegisterResponse<Object> register (@RequestBody RegisterDto registerDto){
-        return studentService.register(registerDto);
+    public RegisterResponse<Object> register (@RequestBody StudentRegisterDto studentRegisterDto){
+        return studentService.register(studentRegisterDto);
     }
 
     //implementer le login
@@ -37,14 +37,14 @@ public class StudentController {
         return studentService.login(loginDto);
     }
 
-    @PostMapping("/delete/{student_id}")
+    @DeleteMapping("/delete/{student_id}")
     public ResponseEntity<String> delete (@PathVariable("student_id") Integer student_id){
         return ResponseEntity.ok(studentService.delete(student_id));
     }
 
     @PutMapping("/update/{student_id}")
-    public ResponseEntity<String> update (@RequestBody RegisterDto registerDto , @PathVariable("student_id") Integer student_id){
-        return ResponseEntity.ok(studentService.update(student_id, registerDto));
+    public ResponseEntity<String> update (@RequestBody StudentRegisterDto studentRegisterDto , @PathVariable("student_id") Integer student_id){
+        return ResponseEntity.ok(studentService.update(student_id, studentRegisterDto ));
     }
 
     @GetMapping("/all")
@@ -52,11 +52,19 @@ public class StudentController {
         return studentRepository.findAll();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<Student>> getById (@PathVariable("id") Integer id){
+    @GetMapping("/{student_id}")
+    public ResponseEntity<Optional<Student>> getById (@PathVariable("student_id") Integer id){
         return ResponseEntity.ok(studentRepository.findById(id));
     }
 
-     */
+    @GetMapping("/classe/{class_id}")
+    public ResponseEntity<List<Student>> getStudentByClasse (@PathVariable("class_id") Integer class_id){
+        var classe = classesRepository.findById(class_id).orElseThrow(() -> new RuntimeException("No class Found"));
+        return ResponseEntity.ok(studentRepository.findAllByClasse(classe));
+    }
+
+
+
+
 
 }

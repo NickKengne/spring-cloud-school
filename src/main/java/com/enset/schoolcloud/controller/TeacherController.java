@@ -3,9 +3,12 @@ import com.enset.schoolcloud.dto.LoginDto;
 import com.enset.schoolcloud.dto.RegisterDto;
 import com.enset.schoolcloud.dto.TeacherRegisterDto;
 
+import com.enset.schoolcloud.entity.Subject;
 import com.enset.schoolcloud.entity.Teacher;
+import com.enset.schoolcloud.repository.SubjectRepository;
 import com.enset.schoolcloud.repository.TeacherRepository;
 import com.enset.schoolcloud.response.RegisterResponse;
+import com.enset.schoolcloud.service.SubjectService;
 import com.enset.schoolcloud.service.TeacherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -22,6 +25,8 @@ import java.util.Optional;
 public class TeacherController {
     private final TeacherService teacherService;
     private final TeacherRepository teacherRepository;
+    private final SubjectRepository subjectRepository;
+    private final SubjectService subjectService;
 
     @PostMapping("/auth/register")
     public RegisterResponse<Object> register(@RequestBody TeacherRegisterDto teacherRegisterDto) {
@@ -34,7 +39,7 @@ public class TeacherController {
         return teacherService.login(loginDto);
     }
 
-    @PostMapping("/delete/{teacher_id}")
+    @DeleteMapping("/delete/{teacher_id}")
     public ResponseEntity<String> delete (@PathVariable("teacher_id") Integer teacher_id){
         return ResponseEntity.ok(teacherService.delete(teacher_id));
     }

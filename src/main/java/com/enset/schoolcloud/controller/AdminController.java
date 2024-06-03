@@ -35,7 +35,7 @@ public class AdminController {
         return adminService.login(loginDto);
     }
 
-    @PostMapping("/delete/{admin_id}")
+    @DeleteMapping("/delete/{admin_id}")
     public ResponseEntity<String> delete (@PathVariable("admin_id") Integer admin_id){
         return ResponseEntity.ok(adminService.delete(admin_id));
     }

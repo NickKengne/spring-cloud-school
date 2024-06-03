@@ -2,13 +2,15 @@ package com.enset.schoolcloud.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Setter
 @Getter
 @Table(name = "class")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Classe {
 
     @Id
@@ -17,8 +19,9 @@ public class Classe {
     private String name;
     private Integer cycle;
     private String name_numeric;
-    private Integer teacher_id;
 
-
+    @OneToOne
+    @JoinColumn(name = "teacher_id")
+    public Teacher teacher;
 
 }

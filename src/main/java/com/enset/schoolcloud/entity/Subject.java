@@ -3,14 +3,15 @@ package com.enset.schoolcloud.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "Subject")
 @Getter
 @Setter
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
