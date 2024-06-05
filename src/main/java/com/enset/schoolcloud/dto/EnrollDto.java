@@ -1,17 +1,18 @@
 package com.enset.schoolcloud.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
-@Getter
-@Setter
-public class StudentRegisterDto extends RegisterDto{
-    private String surname;
-    private String birthday;
-    private String at;
-    private String sex;
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class EnrollDto {
     private String enroll_code;
     private Integer student_id;
     private Integer class_id;
@@ -19,6 +20,4 @@ public class StudentRegisterDto extends RegisterDto{
     private Integer roll;
     private Instant date_added;
     private String year;
-
-
 }

@@ -27,8 +27,8 @@ public class TeacherService {
 
     public RegisterResponse<Object> register(TeacherRegisterDto teacherRegisterDto) {
 
-        var current_class = classesRepository.findById(teacherRegisterDto.getClass_id()).orElseThrow(() -> new RuntimeException("No class found"));
-        var current_section = sectionRepository.findById(teacherRegisterDto.getSection_id()).orElseThrow(() -> new RuntimeException("no section found"));
+       // var current_class = classesRepository.findById(teacherRegisterDto.getClass_id()).orElseThrow(() -> new RuntimeException("No class found"));
+        //var current_section = sectionRepository.findById(teacherRegisterDto.getSection_id()).orElseThrow(() -> new RuntimeException("no section found"));
 
         Teacher teacher = Teacher.builder()
                 .email(teacherRegisterDto.getEmail())
@@ -43,8 +43,6 @@ public class TeacherService {
                 .statut(teacherRegisterDto.getStatut())
                 .speciality(teacherRegisterDto.getSpeciality())
                 .surname(teacherRegisterDto.getSurname())
-                .classe(current_class)
-                .section(current_section)
                 .build();
         teacherRepository.save(teacher);
         return RegisterResponse.builder()

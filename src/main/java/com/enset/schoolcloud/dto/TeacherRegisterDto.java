@@ -11,7 +11,5 @@ public class TeacherRegisterDto extends RegisterDto{
     private  String high_diploma;
     private String speciality;
     private String statut;
-    private Integer class_id;
-    private Integer section_id;
 
 }
