@@ -33,11 +33,6 @@ public class TeacherController {
         return teacherService.register(teacherRegisterDto);
     }
 
-    //implementer le login
-    @PostMapping("/auth/login")
-    public RegisterResponse<Object>  login(@RequestBody LoginDto loginDto){
-        return teacherService.login(loginDto);
-    }
 
     @DeleteMapping("/delete/{teacher_id}")
     public ResponseEntity<String> delete (@PathVariable("teacher_id") Integer teacher_id){
@@ -53,6 +48,12 @@ public class TeacherController {
     public List<Teacher> getAll (){
         return teacherRepository.findAll();
     }
+
+    @GetMapping("/count")
+    public ResponseEntity<Integer> countTeacher (){
+        return ResponseEntity.ok(teacherRepository.findAll().size());
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Teacher>> getById (@PathVariable("id") Integer id){

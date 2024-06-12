@@ -2,12 +2,10 @@ package com.enset.schoolcloud.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 
 @Table(name = "chat")
 @AllArgsConstructor
@@ -15,6 +13,7 @@ import java.sql.Timestamp;
 @Entity
 @Getter
 @Setter
+@Builder
 public class Chat {
 
     @Id
@@ -23,16 +22,9 @@ public class Chat {
     private String name;
     private String message;
     private Integer receiver_id;
-    private Timestamp timestamp;
-
-
-    @OneToOne
-    @JoinColumn(name ="admin_id")
-    private Admin admin;
-
-    @OneToOne
-    @JoinColumn(name ="teacher_id")
-    private Teacher teacher;
+    private Instant timestamp;
+    private Integer admin_id;
+    private Integer teacher_id;
 
 
 }

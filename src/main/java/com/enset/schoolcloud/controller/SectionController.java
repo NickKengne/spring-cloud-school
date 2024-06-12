@@ -9,9 +9,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -32,6 +30,12 @@ public class SectionController {
                 .build();
         sectionRepository.save(section);
         return ResponseEntity.ok("Section created successfully");
+    }
+
+    @GetMapping("/{class_id}")
+    public ResponseEntity<Section> getSectionByClasse (@PathVariable("class_id") Integer class_id){
+        var classe = classesRepository.findById(class_id).orElseThrow(() -> new RuntimeException("No class found"));
+        return ResponseEntity.ok(sectionRepository.findByClasse(classe));
     }
 }
 

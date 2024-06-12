@@ -29,11 +29,6 @@ public class AdminController {
         return adminService.register(registerDto);
     }
 
-    //implementer le login
-    @PostMapping("/auth/login")
-    public RegisterResponse<Object>  login(@RequestBody LoginDto loginDto){
-        return adminService.login(loginDto);
-    }
 
     @DeleteMapping("/delete/{admin_id}")
     public ResponseEntity<String> delete (@PathVariable("admin_id") Integer admin_id){

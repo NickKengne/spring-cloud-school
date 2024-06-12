@@ -43,6 +43,7 @@ public class TeacherService {
                 .statut(teacherRegisterDto.getStatut())
                 .speciality(teacherRegisterDto.getSpeciality())
                 .surname(teacherRegisterDto.getSurname())
+                .type("teacher")
                 .build();
         teacherRepository.save(teacher);
         return RegisterResponse.builder()
@@ -78,9 +79,4 @@ public class TeacherService {
         return "teacher not found";
     }
 
-    public RegisterResponse<Object> login(LoginDto loginDto) {
-        return RegisterResponse.builder()
-                .created_at(Instant.now())
-                .build();
-    }
 }

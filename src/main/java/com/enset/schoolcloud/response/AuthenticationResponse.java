@@ -1,6 +1,5 @@
 package com.enset.schoolcloud.response;
 
-import codex.bookerapi.entity.entreprise.Entreprise;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,11 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponse {
+public class AuthenticationResponse<T> {
     private String token;
     private Boolean error;
     private Boolean success;
     private String message;
-    private String id;
-    private Entreprise enterprise;
+    private Integer id;
+    private T user;
 }

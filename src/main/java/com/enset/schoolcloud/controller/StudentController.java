@@ -5,6 +5,7 @@ import com.enset.schoolcloud.dto.LoginDto;
 import com.enset.schoolcloud.dto.StudentRegisterDto;
 import com.enset.schoolcloud.entity.Student;
 import com.enset.schoolcloud.repository.ClassesRepository;
+import com.enset.schoolcloud.repository.ParentRepository;
 import com.enset.schoolcloud.repository.StudentRepository;
 import com.enset.schoolcloud.response.RegisterResponse;
 import com.enset.schoolcloud.service.StudentService;
@@ -24,6 +25,7 @@ public class StudentController {
     private final StudentService studentService;
     private final StudentRepository studentRepository;
     private final ClassesRepository classesRepository;
+    private final ParentRepository parentRepository;
 
 
     @PostMapping("/auth/register")
@@ -52,6 +54,17 @@ public class StudentController {
         return studentRepository.findAll();
     }
 
+    @GetMapping("/count")
+    public ResponseEntity<Integer> countStudent (){
+        return ResponseEntity.ok(studentRepository.findAll().size());
+    }
+
+    @GetMapping("/parent/count")
+    public ResponseEntity<Integer> countParent (){
+        return ResponseEntity.ok(parentRepository.findAll().size());
+    }
+
+
     @GetMapping("/{student_id}")
     public ResponseEntity<Optional<Student>> getById (@PathVariable("student_id") Integer id){
         return ResponseEntity.ok(studentRepository.findById(id));
@@ -61,6 +74,12 @@ public class StudentController {
     public ResponseEntity<List<Student>> getStudentByClasse (@PathVariable("class_id") Integer class_id){
         var classe = classesRepository.findById(class_id).orElseThrow(() -> new RuntimeException("No class Found"));
         return ResponseEntity.ok(studentRepository.findAllByClasse(classe));
+    }
+
+    @GetMapping("/student/sex")
+    public ResponseEntity<Integer> studentBySex (){
+        String sex = String.valueOf('F');
+        return ResponseEntity.ok(studentRepository.findBySex(sex).size());
     }
 
 

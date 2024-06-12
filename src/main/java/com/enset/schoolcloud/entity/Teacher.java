@@ -1,5 +1,6 @@
 package com.enset.schoolcloud.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +15,7 @@ public class Teacher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer teacher_id;
+    private Integer id;
     private String name;
     private String surname;
     private String birthday;
@@ -27,12 +28,15 @@ public class Teacher {
     private String phone;
     private String email;
     private String password;
+    private String type;
 
     @OneToOne
+    @JsonBackReference
     @JoinColumn(name = "class_id")
     private Classe classe;
 
     @OneToOne
+    @JsonBackReference
     @JoinColumn(name = "section_id")
     private Section section;
 }

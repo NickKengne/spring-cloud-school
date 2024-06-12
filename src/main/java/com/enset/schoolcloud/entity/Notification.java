@@ -2,12 +2,10 @@ package com.enset.schoolcloud.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,6 +13,7 @@ import java.sql.Timestamp;
 @Table(name = "notification")
 @Getter
 @Setter
+@Builder
 public class Notification {
 
     @Id
@@ -24,5 +23,5 @@ public class Notification {
     private Integer admin_id;
     private Integer teacher_id;
     private String diffusion;
-    private Timestamp created_at;
+    private Instant created_at;
 }

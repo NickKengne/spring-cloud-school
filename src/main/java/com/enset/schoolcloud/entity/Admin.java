@@ -67,7 +67,7 @@ public class Admin implements UserDetails {
 
 
 
-    enum Role {
+    public enum Role {
         ADMIN,
         TEACHER,
         SUPER_ADMIN

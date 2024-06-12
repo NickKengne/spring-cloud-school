@@ -6,10 +6,13 @@ package com.enset.schoolcloud.service;
 import com.enset.schoolcloud.dto.LoginDto;
 import com.enset.schoolcloud.dto.RegisterDto;
 import com.enset.schoolcloud.entity.Admin;
+import com.enset.schoolcloud.entity.Teacher;
 import com.enset.schoolcloud.repository.AdminRepository;
+import com.enset.schoolcloud.repository.TeacherRepository;
 import com.enset.schoolcloud.response.RegisterResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -20,15 +23,33 @@ import java.time.Instant;
 public class AdminService {
 
     private final AdminRepository adminRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final TeacherRepository teacherRepository;
 
     public RegisterResponse<Object> register(RegisterDto registerDto) {
         Admin admin = Admin.builder()
                 .email(registerDto.getEmail())
                 .name(registerDto.getName())
-                .password(registerDto.getPassword())
+                .password(passwordEncoder.encode((registerDto.getPassword())))
                 .phone(registerDto.getPhone())
                 .address(registerDto.getAddress())
+                .type(Admin.Role.ADMIN)
                 .build();
+        Teacher teacher = Teacher.builder()
+                .email(registerDto.getEmail())
+                .surname(registerDto.getSurname())
+                .name(registerDto.getName())
+                .password(passwordEncoder.encode((registerDto.getPassword())))
+                .phone(registerDto.getPhone())
+                .address(registerDto.getAddress())
+                .sex(registerDto.getSex())
+                .at(registerDto.getAt())
+                .birthday(registerDto.getBirthday())
+                .higher_diploma(registerDto.getHigher_diploma())
+                .statut(registerDto.getStatut())
+                .type("admin")
+                .build();
+        teacherRepository.save(teacher);
         adminRepository.save(admin);
         return RegisterResponse.builder()
                 .created_at(Instant.now())
@@ -36,11 +57,6 @@ public class AdminService {
                 .build();
     }
 
-    public RegisterResponse<Object> login(LoginDto loginDto) {
-        return RegisterResponse.builder()
-                .created_at(Instant.now())
-                .build();
-    }
 
     public String delete(Integer adminId) {
         var current_admin = adminRepository.findById(adminId);
