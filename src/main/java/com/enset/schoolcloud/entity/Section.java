@@ -19,14 +19,12 @@ public class Section {
     private String name;
 
     @OneToOne
-    //@JsonManagedReference
     @JsonBackReference
     @JoinColumn(name = "class_id")
     private Classe classe;
 
     @OneToOne
     @JsonBackReference
-    //@JsonManagedReference
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 

@@ -2,6 +2,7 @@ package com.enset.schoolcloud.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,14 +23,17 @@ public class Subject {
     private String year;
 
     @OneToOne
+    @JsonBackReference
     @JoinColumn(name = "class_id")
     private Classe classe;
 
     @OneToOne
+    @JsonBackReference
     @JoinColumn(name = "section_id")
     private Section Section;
 
     @OneToOne
+    @JsonBackReference
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 }

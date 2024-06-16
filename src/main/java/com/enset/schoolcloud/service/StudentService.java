@@ -64,12 +64,20 @@ public class StudentService {
                 .class_id(studentRegisterDto.getClass_id())
                 .build();
 
+        var student_are_in_bd = studentRepository.findByEmail(studentRegisterDto.getEmail());
+
+        if (student_are_in_bd.isPresent()){
+            return RegisterResponse.builder()
+                    .entity(null)
+                    .message("student already exists !")
+                    .created_at(Instant.now())
+                    .build();
+        }
         studentRepository.save(student);
         enrollRepository.save(enroll);
-
         return RegisterResponse.builder()
                 .entity(student)
-                .message("successfully created")
+                .message("student successfully created !")
                 .created_at(Instant.now())
                 .build();
     }
