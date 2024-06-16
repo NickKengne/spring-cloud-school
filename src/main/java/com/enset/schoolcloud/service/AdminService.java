@@ -49,11 +49,24 @@ public class AdminService {
                 .statut(registerDto.getStatut())
                 .type("admin")
                 .build();
+        var user_in_admin = adminRepository.findByEmail(registerDto.getEmail());
+        var user_in_teacher = teacherRepository.findByEmail(registerDto.getEmail());
+        if (user_in_admin.isPresent() || user_in_teacher.isPresent()){
+            RegisterResponse.builder()
+                    .created_at(Instant.now())
+                    .message("Email already exists !")
+                    .error(true)
+                    .success(false)
+                    .entity(null)
+                    .build();
+        }
         teacherRepository.save(teacher);
         adminRepository.save(admin);
         return RegisterResponse.builder()
                 .created_at(Instant.now())
                 .entity(admin)
+                .success(true)
+                .message("User created successfully !")
                 .build();
     }
 
