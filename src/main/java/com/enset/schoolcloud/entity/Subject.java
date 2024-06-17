@@ -22,17 +22,17 @@ public class Subject {
     private String code;
     private String year;
 
-    @OneToOne
+    @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "class_id")
     private Classe classe;
 
-    @OneToOne
+    @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "section_id")
     private Section Section;
 
-    @OneToOne
+    @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;

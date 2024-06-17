@@ -18,6 +18,7 @@ public class Section {
     private Integer section_id;
     private String name;
 
+
     @OneToOne
     @JsonBackReference
     @JoinColumn(name = "class_id")

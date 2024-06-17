@@ -17,13 +17,10 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer student_id;
-    @Column(nullable = false)
     private String student_code;
     private String name;
     private String surname;
-    @Column(nullable = false)
     private String email;
-    @Column(nullable = false)
     private String password;
     private String phone;
     private String birthday;
@@ -38,7 +35,7 @@ public class Student {
     private Parent parent;
 
 
-    @OneToOne
+    @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "class_id")
     private Classe classe;

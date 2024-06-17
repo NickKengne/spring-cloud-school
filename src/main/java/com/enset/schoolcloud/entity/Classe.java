@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Setter
 @Getter
@@ -25,5 +27,8 @@ public class Classe {
     @JsonBackReference
     @JoinColumn(name = "teacher_id")
     public Teacher teacher;
+
+    @OneToMany
+    public List<Section> sections;
 
 }

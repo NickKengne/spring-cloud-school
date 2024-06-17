@@ -36,6 +36,7 @@ public class SubjectService {
                 .Section(section)
                 .classe(classe)
                 .build();
+        subjectRepository.save(thisSubject);
         return HttpStatus.CREATED;
     }
 
