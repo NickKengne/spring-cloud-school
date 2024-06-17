@@ -10,10 +10,10 @@ import java.time.Instant;
 public class StudentRegisterDto extends RegisterDto{
     private String surname;
     private String birthday;
+    private String student_code;
     private String at;
     private String sex;
     private String enroll_code;
-    private Integer student_id;
     private Integer class_id;
     private Integer section_id;
     private Integer roll;

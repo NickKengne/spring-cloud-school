@@ -6,6 +6,7 @@ import com.enset.schoolcloud.dto.LoginDto;
 import com.enset.schoolcloud.dto.StudentRegisterDto;
 import com.enset.schoolcloud.entity.Enroll;
 import com.enset.schoolcloud.entity.Student;
+import com.enset.schoolcloud.repository.ClassesRepository;
 import com.enset.schoolcloud.repository.EnrollRepository;
 import com.enset.schoolcloud.repository.StudentRepository;
 import com.enset.schoolcloud.response.RegisterResponse;
@@ -20,6 +21,7 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
     private final EnrollRepository enrollRepository;
+    private final ClassesRepository classesRepository;
 
 
     public String update(Integer studentId, StudentRegisterDto StudentRegisterDto){
@@ -45,6 +47,8 @@ public class StudentService {
 
     public RegisterResponse<Object> register(StudentRegisterDto studentRegisterDto) {
 
+        var classe = classesRepository.findById(studentRegisterDto.getClass_id());
+
         var student = Student.builder()
                 .at(studentRegisterDto.getAt())
                 .name(studentRegisterDto.getName())
@@ -54,11 +58,13 @@ public class StudentService {
                 .birthday(studentRegisterDto.getBirthday())
                 .surname(studentRegisterDto.getSurname())
                 .password(studentRegisterDto.getPassword())
+                .student_code(studentRegisterDto.getStudent_code())
+                .classe(classe.get())
                 .build();
 
        // EnrollDto enrollDto = new EnrollDto();
         var enroll = Enroll.builder()
-                .student_id(student.getStudent_id())
+                .student(student)
                 .year(studentRegisterDto.getYear())
                 .section_id(studentRegisterDto.getSection_id())
                 .class_id(studentRegisterDto.getClass_id())

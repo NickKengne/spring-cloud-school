@@ -4,7 +4,11 @@ import com.enset.schoolcloud.entity.Classe;
 import com.enset.schoolcloud.entity.Section;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SectionRepository extends JpaRepository<Section, Integer> {
+import java.util.List;
+import java.util.Optional;
 
-    Section findByClasse(Classe classe);
+public interface SectionRepository extends JpaRepository<Section, Integer> {
+    Optional<Classe> findByClasse(Classe classe);
+
+    List<Section> findAllByClasse(Classe classe);
 }

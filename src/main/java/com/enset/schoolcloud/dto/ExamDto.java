@@ -5,12 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SectionDto {
+public class ExamDto {
     private String name;
-    private Integer class_id;
-    private Integer teacher_id;
+    private String date;
+    private String year;
+    private String comment;
 }

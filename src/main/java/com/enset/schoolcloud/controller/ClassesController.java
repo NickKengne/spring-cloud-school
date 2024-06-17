@@ -1,6 +1,7 @@
 package com.enset.schoolcloud.controller;
 
 import com.enset.schoolcloud.dto.ClasseDto;
+import com.enset.schoolcloud.dto.SectionDto;
 import com.enset.schoolcloud.entity.Classe;
 import com.enset.schoolcloud.repository.ClassesRepository;
 import com.enset.schoolcloud.repository.TeacherRepository;
@@ -29,7 +30,6 @@ private final ClassesService classesService;
     public ResponseEntity<HttpStatus> createClasse (@RequestBody ClasseDto classeDto){
         return ResponseEntity.ok(classesService.create(classeDto));
     }
-
 
     @GetMapping("/all")
     public ResponseEntity<List<Classe>> getAllClasses (){
