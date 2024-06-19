@@ -35,6 +35,7 @@ public class AdminService {
                 .address(registerDto.getAddress())
                 .type(Admin.Role.ADMIN)
                 .build();
+
         Teacher teacher = Teacher.builder()
                 .email(registerDto.getEmail())
                 .surname(registerDto.getSurname())
@@ -49,6 +50,7 @@ public class AdminService {
                 .statut(registerDto.getStatut())
                 .type("admin")
                 .build();
+
         var user_in_admin = adminRepository.findByEmail(registerDto.getEmail());
         var user_in_teacher = teacherRepository.findByEmail(registerDto.getEmail());
         if (user_in_admin.isPresent() || user_in_teacher.isPresent()){
@@ -60,14 +62,17 @@ public class AdminService {
                     .entity(null)
                     .build();
         }
-        teacherRepository.save(teacher);
-        adminRepository.save(admin);
-        return RegisterResponse.builder()
-                .created_at(Instant.now())
-                .entity(admin)
-                .success(true)
-                .message("User created successfully !")
-                .build();
+       else {
+            teacherRepository.save(teacher);
+            adminRepository.save(admin);
+            return RegisterResponse.builder()
+                    .created_at(Instant.now())
+                    .entity(admin)
+                    .success(true)
+                    .message("User created successfully !")
+                    .build();
+        }
+        return null;
     }
 
 

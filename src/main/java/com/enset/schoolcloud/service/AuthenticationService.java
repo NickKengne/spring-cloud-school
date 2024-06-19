@@ -31,9 +31,11 @@ public class AuthenticationService  {
 
     public AuthenticationResponse<Object> authenticate(LoginDto request) {
         var user = adminRepository.findByEmail((request.getEmail()));
+        var user_in_teacher = teacherRepository.findByEmail(request.getEmail());
+
 
         // verify if user is verified or not
-        if (user.isEmpty()){
+        if (user.isEmpty() || user_in_teacher.isEmpty()){
             return AuthenticationResponse.builder()
                     .success(false)
                     .message("User doesn't exist !")
@@ -48,18 +50,6 @@ public class AuthenticationService  {
                                 request.getPassword()
                         )
                 );
-
-        var user_in_teacher = teacherRepository.findByEmail(request.getEmail());
-        if (user_in_teacher.isEmpty()){
-            return AuthenticationResponse.builder()
-                    .error(true)
-                    .message("error admin doesn't found")
-                    .token(null)
-                    .success(false)
-                    .id(null)
-                    .user(null)
-                    .build();
-        }
                 //create a jwtToken
                 var jwtToken = jwtService.generateToken(user.get());
                 return AuthenticationResponse.builder()

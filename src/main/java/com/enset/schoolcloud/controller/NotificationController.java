@@ -31,7 +31,7 @@ public class NotificationController {
         return ResponseEntity.ok(notificationRepository.findAll());
     }
 
-    @DeleteMapping("/{notification_id}")
+    @DeleteMapping("/delete/{notification_id}")
     public ResponseEntity<NotificationResponse> delete (@PathVariable("notification_id") Integer notification_id){
         notificationRepository.deleteById(notification_id);
         return ResponseEntity.ok(NotificationResponse.builder()

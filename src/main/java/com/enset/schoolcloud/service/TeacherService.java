@@ -11,6 +11,7 @@ import com.enset.schoolcloud.response.RegisterResponse;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -24,16 +25,15 @@ public class TeacherService {
     private final TeacherRepository teacherRepository;
     private final ClassesRepository classesRepository;
     private final SectionRepository sectionRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public RegisterResponse<Object> register(TeacherRegisterDto teacherRegisterDto) {
 
-       // var current_class = classesRepository.findById(teacherRegisterDto.getClass_id()).orElseThrow(() -> new RuntimeException("No class found"));
-        //var current_section = sectionRepository.findById(teacherRegisterDto.getSection_id()).orElseThrow(() -> new RuntimeException("no section found"));
 
         Teacher teacher = Teacher.builder()
                 .email(teacherRegisterDto.getEmail())
                 .name(teacherRegisterDto.getName())
-                .password(teacherRegisterDto.getPassword())
+                .password(passwordEncoder.encode(teacherRegisterDto.getPassword()))
                 .phone(teacherRegisterDto.getPhone())
                 .address(teacherRegisterDto.getAddress())
                 .sex(teacherRegisterDto.getSex())
@@ -45,11 +45,25 @@ public class TeacherService {
                 .surname(teacherRegisterDto.getSurname())
                 .type("teacher")
                 .build();
-        teacherRepository.save(teacher);
-        return RegisterResponse.builder()
-                .created_at(Instant.now())
-                .entity(teacher)
-                .build();
+
+        var teacher_exist_in_user =teacherRepository.findByEmail(teacherRegisterDto.getEmail());
+        if (teacher_exist_in_user.isPresent()){
+            return RegisterResponse.builder()
+                    .message("Teacher already exist !")
+                    .error(true)
+                    .success(false)
+                    .build();
+        }
+        else {
+            teacherRepository.save(teacher);
+            return RegisterResponse.builder()
+                    .created_at(Instant.now())
+                    .message("teacher created successfully !")
+                    .success(true)
+                    .error(false)
+                    .entity(teacher)
+                    .build();
+        }
     }
 
     public String delete(Integer teacher_id) {
@@ -75,7 +89,6 @@ public class TeacherService {
             current_admin.get().setEmail(registerDto.getEmail());
             return "Teacher update successfully";
         }
-        log.info("teacher not found");
         return "teacher not found";
     }
 
