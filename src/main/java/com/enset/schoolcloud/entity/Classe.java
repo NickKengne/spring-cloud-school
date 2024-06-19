@@ -29,6 +29,10 @@ public class Classe {
     public Teacher teacher;
 
     @OneToMany
+    @JsonBackReference
+    public List<Student> students;
+
+    @OneToMany
     public List<Section> sections;
 
 }
