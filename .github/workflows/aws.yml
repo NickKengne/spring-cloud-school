@@ -67,7 +67,7 @@ jobs:
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
-          password: ${{ secrets.EC2_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Deploy image to EC2
         run: |
