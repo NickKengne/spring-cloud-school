@@ -71,7 +71,7 @@ jobs:
 
       - name: Deploy image to EC2
         run: |
-          ssh -i ./ssh/authorized_keys ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}
+          ssh -i /home/nick/Desktop/school_key_pari.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}
           sudo docker pull nickdk294/school-cloud:1.0 || true
           sudo docker stop school_cloud || true
           sudo docker rm school_cloud || true
