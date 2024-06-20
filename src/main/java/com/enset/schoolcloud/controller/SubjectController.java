@@ -59,7 +59,7 @@ public class SubjectController {
         return ResponseEntity.ok(subjectRepository.findAllByClasse(classe));
     }
 
-    @GetMapping("/{teacher_id}")
+    @GetMapping("/teacher/{teacher_id}")
     public ResponseEntity<List<Subject>> getSubjectByTeacherByClass (@PathVariable("teacher_id") Integer teacher_id){
         return ResponseEntity.ok(subjectService.getSubjecByTeacherByClass(teacher_id));
     }
