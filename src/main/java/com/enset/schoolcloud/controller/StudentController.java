@@ -76,7 +76,7 @@ public class StudentController {
         return ResponseEntity.ok(studentRepository.findAllByClasse(classe));
     }
 
-    @GetMapping("/student/sex")
+    @GetMapping("/studen/sex")
     public ResponseEntity<Integer> studentBySex (){
         String sex = String.valueOf('F');
         return ResponseEntity.ok(studentRepository.findBySex(sex).size());
