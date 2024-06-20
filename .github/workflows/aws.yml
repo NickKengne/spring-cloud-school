@@ -71,8 +71,6 @@ jobs:
 
       - name: Deploy image to EC2
         run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
           ssh -i ${{ secrets.EC2_KEY }} ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} 
           sudo docker pull nickdk294/school-cloud:1.0 || true
           sudo docker stop school_cloud || true
