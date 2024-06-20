@@ -81,5 +81,5 @@ jobs:
               sudo docker stop school_cloud || true
               sudo docker rm school_cloud || true
             fi
-            sudo docker run -d -p 80:8082 --name school_cloud nickdk294/school-cloud:1.0
+            sudo docker run -d -p 80:8082 nickdk294/school-cloud:1.0
          
