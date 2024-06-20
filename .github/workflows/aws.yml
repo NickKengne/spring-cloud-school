@@ -76,8 +76,10 @@ jobs:
 
       - name: Deploy image to EC2
         run: |
-          sudo docker pull nickdk294/school-cloud:1.0 || true
-          sudo docker stop school_cloud || true
-          sudo docker rm school_cloud || true
-          sudo docker run -d -p 80:8082 nickdk294/school-cloud:1.0
+            sudo docker pull nickdk294/school-cloud:1.0 || true
+            if [ "$(docker ps -a -q -f name=school_cloud)" ]; then
+              sudo docker stop school_cloud || true
+              sudo docker rm school_cloud || true
+            fi
+            sudo docker run -d -p 80:8082 --name school_cloud nickdk294/school-cloud:1.0
          
