@@ -29,6 +29,11 @@ public class AdminController {
         return adminService.register(registerDto);
     }
 
+    @PostMapping("/register")
+    public RegisterResponse<Object> auth (@RequestBody RegisterDto registerDto){
+        return adminService.register(registerDto);
+    }
+
 
     @DeleteMapping("/delete/{admin_id}")
     public ResponseEntity<String> delete (@PathVariable("admin_id") Integer admin_id){
